@@ -37,6 +37,7 @@ allprojects {
         testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     }
 
+
     tasks.test {
 //        useJUnitPlatform()
         testLogging {
@@ -51,6 +52,7 @@ allprojects {
 }
 
 
+apply<gradle.exercise.GradleExcercisePlugin>()
 
 //dependencies {
 //    // Use the Kotlin JDK 8 standard library.
