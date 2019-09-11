@@ -1,4 +1,4 @@
-# Sample for the Gradle-based coding exersizes
+# Gradle-based coding exercises
 
 Following commands are supported:
 
@@ -8,5 +8,4 @@ Following commands are supported:
 - `nextEx` - switch to the next exercise
 - `prevEx` - switch to the previous exercise
 - `gotoEx<nnn>` where `<nnn>` is the number of the exercise - go to specific exercise
-
 

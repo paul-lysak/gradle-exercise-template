@@ -23,6 +23,7 @@ class GradleExcercisePlugin : Plugin<Project> {
 
     private val tc = TermColors(TermColors.Level.ANSI16)
 
+
     override fun apply(project: Project) {
 
         val exerciseNames: List<String> by lazy {
@@ -55,14 +56,14 @@ class GradleExcercisePlugin : Plugin<Project> {
         project.task("man") {
             doLast {
                 val manText = project.file(manFile).readText()
-                println(manText)
+                println(MarkdownFormatter.markdownToAnsiText(manText))
             }
         }
 
         project.task("manEx") {
             doLast {
                 val manText = project.file(manExFile).readText()
-                println(manText)
+                println(MarkdownFormatter.markdownToAnsiText(manText))
             }
         }
 

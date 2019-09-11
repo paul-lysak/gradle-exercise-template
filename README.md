@@ -11,3 +11,5 @@ Optionally create corresponding package in `exercises/src/main/kotlin`.
 
 When switching to the new exercise the folder `exercises/src/test` gets replaced with corresponding folder from the
 exercise. Main code isn't affected. 
+
+
