@@ -5,7 +5,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 class GradleExcercisePlugin : Plugin<Project> {
-    private val manFile = "common/src/test/resources/README.md"
 
     private val curricullumFolder = ".curriculum"
 
@@ -15,6 +14,10 @@ class GradleExcercisePlugin : Plugin<Project> {
 
     private val exercisesWorkDir = "exercises"
     private val replacementFolder = "src/test"
+
+    private val manFile = "common/src/test/resources/README.md"
+    private val manExFile = exercisesWorkDir.sep() + "src/test/resources/README.md"
+
 
     private fun String.sep() = if (this.isEmpty() || this.endsWith("/")) this else this + "/"
 
@@ -55,6 +58,14 @@ class GradleExcercisePlugin : Plugin<Project> {
                 println(manText)
             }
         }
+
+        project.task("manEx") {
+            doLast {
+                val manText = project.file(manExFile).readText()
+                println(manText)
+            }
+        }
+
 
         project.task("listEx") {
             doLast {

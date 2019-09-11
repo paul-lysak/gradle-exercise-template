@@ -10,7 +10,7 @@ class FundamentalsSpec : StringSpec() {
         }
 
         "ListCalculations must calculate vector length" {
-            ListCalculations.vectorLength(listOf(3, 4)) shouldBe 5
+            ListCalculations.vectorLength(SampleTestUtils.egyptianTriangleCatheti) shouldBe SampleTestUtils.egyptianTriangleHypotenuse
         }
     }
 }

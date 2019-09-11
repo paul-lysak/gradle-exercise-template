@@ -36,7 +36,7 @@ allprojects {
 
 
     tasks.test {
-//        useJUnitPlatform()
+        useJUnitPlatform()
         testLogging {
             outputs.upToDateWhen { false } //always run tests
             events("passed", "skipped", "failed")
@@ -46,6 +46,28 @@ allprojects {
     }
 
 
+}
+
+project(":common") {
+    configurations {
+        create("test")
+    }
+
+    tasks.register<Jar>("testJar") {
+        getArchiveClassifier().set("test")
+        from(project.the<SourceSetContainer>()["test"].output)
+    }
+
+    artifacts {
+        add("test", tasks["testJar"])
+    }
+}
+
+project(":exercises") {
+    dependencies {
+        implementation(project(":common"))
+        testImplementation(project(":common", configuration = "test"))
+    }
 }
 
 
