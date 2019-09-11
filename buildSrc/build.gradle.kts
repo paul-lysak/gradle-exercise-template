@@ -6,3 +6,7 @@ plugins {
 repositories {
     jcenter()
 }
+
+dependencies {
+    implementation("com.github.ajalt:mordant:1.2.1")
+}

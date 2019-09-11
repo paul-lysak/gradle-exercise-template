@@ -1,5 +1,6 @@
 package gradle.exercise
 
+import com.github.ajalt.mordant.TermColors
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -12,6 +13,12 @@ class GradleExcercisePlugin : Plugin<Project> {
 
     private val currentExerciseFile = ".current_exercise"
 
+    private val exercisesWorkDir = "exercises"
+    private val replacementFolder = "src/test"
+
+    private fun String.sep() = if (this.isEmpty() || this.endsWith("/")) this else this + "/"
+
+    private val tc = TermColors(TermColors.Level.ANSI16)
 
     override fun apply(project: Project) {
 
@@ -32,8 +39,12 @@ class GradleExcercisePlugin : Plugin<Project> {
         }
 
         fun switchExercise(targetExercise: String) {
-            println("TODO: swtich to $targetExercise")
-            //TODO swap test dirs content
+            println("Switching to $targetExercise")
+
+            //TODO support .zip files
+            val targetDir = project.file(exercisesWorkDir.sep() + replacementFolder)
+            targetDir.deleteRecursively()
+            project.file(curricullumFolder.sep() + targetExercise.sep() + replacementFolder).copyRecursively(targetDir, overwrite = false)
 
             project.file(currentExerciseFile).writeText(targetExercise)
         }
@@ -47,9 +58,14 @@ class GradleExcercisePlugin : Plugin<Project> {
 
         project.task("listEx") {
             doLast {
+                val current = currentExName()
                 println("All available exercises:")
                 for ((i, name) in exerciseNames.withIndex()) {
-                    println("${i + 1}. $name")
+                    val msg = "${i + 1}. $name"
+                    if (current == name)
+                        println(tc.bold(msg))
+                    else
+                        println(msg)
                 }
             }
         }
@@ -89,7 +105,7 @@ class GradleExcercisePlugin : Plugin<Project> {
         }
 
         for ((i, name) in exerciseNamesIndexed) {
-            project.task("gotoEx$i") {
+            project.task("gotoEx${i + 1}") {
                 doLast {
                     switchExercise(name)
                 }

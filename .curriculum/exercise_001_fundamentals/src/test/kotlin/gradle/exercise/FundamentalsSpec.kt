@@ -1,5 +1,6 @@
-import io.kotlintest.specs.StringSpec
+package gradle.exercise
 
+import io.kotlintest.specs.StringSpec
 import io.kotlintest.shouldBe
 
 class FundamentalsSpec: StringSpec() {
